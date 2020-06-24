@@ -1,0 +1,33 @@
+apiVersion: v1
+baseDomain: vmware.local
+compute:
+  - hyperthreading: Enabled
+    name: worker
+    replicas: 0
+
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+
+metadata:
+  name: acme
+
+networking:
+  networkType: NCP
+  clusterNetwork:
+  - cidr: 10.4.0.0/16
+    hostPrefix: 23
+  machineCIDR: 10.114.16.0/24
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    vcenter: vcsa.acme.vmware.local
+    username: administrator@vsphere.local
+    password: VMware1!
+    datacenter: Prod-Cloud
+    defaultDatastore: vsanDatastore
+pullSecret: '<your pullSecret here>'
+
+sshKey: '<your SSH key here...the whole file>'
